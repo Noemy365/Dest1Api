@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordem Paranormal</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            color: #f1e9e8;
+            font-family: Inter, Arial, sans-serif;
+            background:
+                    radial-gradient(ellipse at 50% -15%, rgba(126, 29, 42, .34), transparent 55%),
+                    linear-gradient(rgba(10, 8, 11, .92), rgba(10, 8, 11, .97)),
+                    #0d0b0e;
+        }
+
+        header {
+            text-align: center;
+            padding: 45px 20px 35px;
+            border-bottom: 1px solid #49343a;
+        }
+
+        .sigilo {
+            font-size: 45px;
+            color: #d65a61;
+            margin-bottom: 15px;
+        }
+
+        h1, h2, h3 {
+            font-family: Cinzel, Georgia, serif;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(27px, 5vw, 46px);
+            letter-spacing: .12em;
+        }
+
+        header p {
+            color: #b7a9ac;
+            font-size: 13px;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+        }
+
+        main {
+            width: min(1050px, calc(100% - 32px));
+            margin: 35px auto;
+        }
+
+        .painel {
+            padding: 26px;
+            background: rgba(25, 20, 25, .94);
+            border: 1px solid #49343a;
+            border-top: 3px solid #a8323d;
+        }
+
+        .titulo {
+            margin-bottom: 22px;
+            font-size: 19px;
+            letter-spacing: .04em;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px 20px;
+        }
+
+        label {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            color: white;
+            background: #100d11;
+            border: 1px solid #59434a;
+            border-radius: 4px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        input:focus {
+            border-color: #d65a61;
+        }
+
+        input::placeholder {
+            color: #796c71;
+        }
+
+        .acoes {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 22px;
+        }
+
+        button {
+            padding: 12px 19px;
+            border: 1px solid #c04b55;
+            border-radius: 4px;
+            background: linear-gradient(135deg, #9d2c38, #6e1e29);
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        button:hover {
+            filter: brightness(1.2);
+        }
+
+        .secundario {
+            background: #211a21;
+            border-color: #59434a;
+        }
+
+        #mensagem {
+            font-size: 13px;
+        }
+
+        .sucesso {
+            color: #91c69a;
+        }
+
+        .erro {
+            color: #ff858b;
+        }
+
+        .registros {
+            margin-top: 40px;
+        }
+
+        .topo-lista {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .lista {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 16px;
+        }
+
+        .card {
+            padding: 20px;
+            background: linear-gradient(145deg, #251c23, #151116);
+            border: 1px solid #563b43;
+            border-left: 3px solid #a8323d;
+        }
+
+        .card h3 {
+            color: #f0c9cc;
+            font-size: 18px;
+            margin-top: 0;
+        }
+
+        .card p {
+            color: #b7a9ac;
+            font-size: 13px;
+        }
+
+        .card strong {
+            color: #e9dadd;
+        }
+
+        .vazio {
+            grid-column: 1 / -1;
+            padding: 28px;
+            text-align: center;
+            color: #b7a9ac;
+            border: 1px dashed #59434a;
+        }
+
+        footer {
+            padding: 22px;
+            text-align: center;
+            color: #81747a;
+            font-size: 11px;
+            letter-spacing: .15em;
+        }
+
+        footer span {
+            color: #d65a61;
+        }
+
+        @media (max-width: 620px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .painel {
+                padding: 19px;
+            }
+
+            .topo-lista {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="sigilo">◈</div>
+    <h1>ORDEM PARANORMAL</h1>
+    <p>Arquivo de investigadores</p>
+    <div>O medo é apenas o começo.</div>
+</header>
+
+<main>
+
+    <section class="painel">
+
+        <h2 class="titulo">Registrar personagem</h2>
+
+        <form id="formRpg">
+
+            <div class="form-grid">
+
+                <label>
+                    Nome
+                    <input type="text" id="nome"
+                           placeholder="Nome do personagem" required>
+                </label>
+
+                <label>
+                    Classe
+                    <input type="text" id="classe"
+                           placeholder="Ex.: Combatente" required>
+                </label>
+
+                <label>
+                    Origem
+                    <input type="text" id="origem"
+                           placeholder="Origem do personagem" required>
+                </label>
+
+                <label>
+                    NEX
+                    <input type="text" id="nex"
+                           placeholder="Ex.: 5%" required>
+                </label>
+
+            </div>
+
+            <div class="acoes">
+
+                <button type="submit" id="btnCadastrar">
+                    + Cadastrar personagem
+                </button>
+
+                <button type="button" class="secundario"
+                        id="btnLimpar">
+                    Limpar campos
+                </button>
+
+                <p id="mensagem"></p>
+
+            </div>
+
+        </form>
+
+    </section>
+
+    <section class="registros">
+
+        <div class="topo-lista">
+            <h2 class="titulo">Personagens registrados</h2>
+
+            <button type="button" class="secundario"
+                    id="btnAtualizar">
+                ↻ Atualizar lista
+            </button>
+        </div>
+
+        <div class="lista" id="listaRpg">
+            <p class="vazio">Carregando registros...</p>
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    ARQUIVO DA ORDEM <span>•</span> A REALIDADE É UMA SÓ.
+</footer>
+
+<script>
+
+    const API_URL = "http://localhost:8080/api/rpg";
+
+    const form = document.getElementById("formRpg");
+    const lista = document.getElementById("listaRpg");
+    const mensagem = document.getElementById("mensagem");
+    const botaoCadastrar = document.getElementById("btnCadastrar");
+
+    // GET - Listar personagens
+
+    async function listarPersonagens() {
+
+        lista.innerHTML = '<p class="vazio">Consultando arquivos...</p>';
+
+        try {
+
+            const resposta = await fetch(API_URL);
+
+            if (!resposta.ok) {
+                throw new Error("Erro HTTP: " + resposta.status);
+            }
+
+            const personagens = await resposta.json();
+
+            lista.innerHTML = "";
+
+            if (!Array.isArray(personagens) || personagens.length === 0) {
+                lista.innerHTML =
+                    '<p class="vazio">Nenhum personagem registrado ainda.</p>';
+                return;
+            }
+
+            personagens.forEach(personagem => {
+
+                const card = document.createElement("article");
+                card.className = "card";
+
+                const nome = document.createElement("h3");
+                nome.textContent = personagem.nome || "Sem nome";
+
+                const classe = document.createElement("p");
+                classe.textContent = "Classe: " + (personagem.classe || "-");
+
+                const origem = document.createElement("p");
+                origem.textContent = "Origem: " + (personagem.origem || "-");
+
+                const nex = document.createElement("p");
+                nex.textContent = "NEX: " + (personagem.nex || "-");
+
+                card.append(nome, classe, origem, nex);
+
+                lista.appendChild(card);
+
+            });
+
+        } catch (erro) {
+
+            console.error(erro);
+
+            lista.innerHTML =
+                '<p class="vazio erro">Não foi possível carregar os personagens. Verifique se a API está funcionando.</p>';
+
+        }
+
+    }
+
+    // POST - Cadastrar personagem
+
+    form.addEventListener("submit", async (evento) => {
+
+        evento.preventDefault();
+
+        const personagem = {
+
+            nome: document.getElementById("nome").value.trim(),
+            classe: document.getElementById("classe").value.trim(),
+            origem: document.getElementById("origem").value.trim(),
+            nex: document.getElementById("nex").value.trim()
+
+        };
+
+        mensagem.textContent = "Enviando registro...";
+        mensagem.className = "";
+
+        botaoCadastrar.disabled = true;
+
+        try {
+
+            const resposta = await fetch(API_URL, {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(personagem)
+
+            });
+
+            if (!resposta.ok) {
+                throw new Error("Erro ao cadastrar personagem.");
+            }
+
+            mensagem.textContent = "Personagem cadastrado com sucesso!";
+            mensagem.className = "sucesso";
+
+            form.reset();
+
+            await listarPersonagens();
+
+        } catch (erro) {
+
+            console.error(erro);
+
+            mensagem.textContent =
+                "Não foi possível cadastrar o personagem.";
+
+            mensagem.className = "erro";
+
+        } finally {
+
+            botaoCadastrar.disabled = false;
+
+        }
+
+    });
+
+    // Atualizar lista
+
+    document.getElementById("btnAtualizar")
+        .addEventListener("click", listarPersonagens);
+
+    // Limpar formulário
+
+    document.getElementById("btnLimpar")
+        .addEventListener("click", () => {
+
+            form.reset();
+            mensagem.textContent = "";
+            mensagem.className = "";
+
+        });
+
+    // Carregar personagens ao abrir a página
+
+    listarPersonagens();
+
+</script>
+
+</body>
+</html>
